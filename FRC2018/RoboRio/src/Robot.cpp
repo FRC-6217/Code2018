@@ -1,4 +1,5 @@
-// FRC Team 6217 Robot Code 2018u
+// FRC Team 6217 Robot Code 2018
+//
 
 #define _GLIBCXX_USE_CXX11_ABI 0
 //Include needed libraries
