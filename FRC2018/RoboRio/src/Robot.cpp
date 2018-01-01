@@ -1,5 +1,5 @@
-//!!! GARBAGE PROGAMMING ALERT !!!
-//EVAN DOES NOT TAKE ANY RESPONABILITY FOR ANY MENTAL DAMAGES THAT MAY OCCUR
+// FRC Team 6217 Robot Code 2018u
+
 #define _GLIBCXX_USE_CXX11_ABI 0
 //Include needed libraries
 #include <iostream>
@@ -452,7 +452,7 @@ class Robot: public frc::IterativeRobot {
     //Code for testing stuff.
     void TestPeriodic() {
         printf("Switch: %d\n", limitSwitch->Get());
-        uint8_t data[1];
+        // uint8_t data[1];
         char* read = new char[serial->GetBytesReceived()];
         serial->Read(read, serial->GetBytesReceived());
         frc::SmartDashboard::PutString("Serial\n", std::string(read));
