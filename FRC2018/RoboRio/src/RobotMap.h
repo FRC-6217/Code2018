@@ -7,6 +7,11 @@
 
 #pragma once
 
+constexpr int FL_MOTOR = 0;
+constexpr int FR_MOTOR = 1;
+constexpr int BL_MOTOR = 2;
+constexpr int BR_MOTOR = 3;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
