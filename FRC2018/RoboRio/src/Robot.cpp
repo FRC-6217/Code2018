@@ -18,6 +18,8 @@
 
 class Robot : public frc::IterativeRobot {
 public:
+
+	//Objects for VictorSPX Motors and for the differentialDrive
 	WPI_VictorSPX* flDrive;
 	WPI_VictorSPX* blDrive;
 	frc::SpeedControllerGroup* lDrive;
