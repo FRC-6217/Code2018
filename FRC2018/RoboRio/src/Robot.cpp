@@ -29,6 +29,13 @@ public:
 	frc::DifferentialDrive* Drive;
 
 	frc::Joystick* joystick;
+	frc::Joystick* xboxJoystick;
+
+	Spark* acmeScrew1;
+	Spark* acmeScrew2;
+
+	WPI_VictorSPX* grabberLeft;
+	WPI_VictorSPX* grabberRight;
 
 	void RobotInit() {
 		m_chooser.AddDefault(kAutoNameDefault, kAutoNameDefault);
@@ -46,6 +53,13 @@ public:
 		Drive = new frc::DifferentialDrive(*lDrive, *rDrive);
 
 		joystick = new frc::Joystick(0);
+		xboxJoystick = new frc::Joystick(1);
+
+		acmeScrew1 = new Spark(0);
+		acmeScrew2 = new Spark(1);
+
+		grabberLeft = new WPI_VictorSPX(45);
+		grabberRight = new WPI_VictorSPX(46);
 	}
 
 	/*
@@ -86,7 +100,50 @@ public:
 	void TeleopInit() {}
 
 	void TeleopPeriodic() {
-		Drive->ArcadeDrive(joystick->GetX(), joystick->GetZ(), true);
+		Drive->SetMaxOutput((joystick->GetRawAxis(3) - 1)/-1);
+
+		float x = fabs(joystick->GetY()) > 0.15 ? joystick->GetY() : 0.0;
+		float z = fabs(joystick->GetZ()) > 0.1 ? joystick->GetZ() : 0.0;
+
+		Drive->ArcadeDrive(x, z, true);
+
+		//controls Acme Screw 2
+		if (xboxJoystick->GetRawAxis(2)){
+			acmeScrew2->Set(-1); //up
+		}
+		else if (xboxJoystick->GetRawAxis(3)) {
+			acmeScrew2->Set(1); //down
+		}
+		else {
+			acmeScrew2->Set(0);
+		}
+
+		//Controls Acme Screw 1
+		if (xboxJoystick->GetRawButton(5)){
+			acmeScrew1->Set(-1); //up
+		}
+		else if (xboxJoystick->GetRawButton(6)){
+			acmeScrew1->Set(1); //down
+		}
+		else {
+			acmeScrew1->Set(0);
+		}
+
+		//controls Grabber Mechanism
+		if (xboxJoystick->GetRawButton(1)){
+			grabberLeft->Set(.5); //suck in
+			grabberRight->Set(.5);
+		}
+		else if (xboxJoystick->GetRawButton(2)) {
+			grabberLeft->Set(-.5); //shoot out
+			grabberRight->Set(-.5);
+		}
+		else {
+			grabberLeft->Set(0); //stop
+			grabberRight->Set(0);
+		}
+
+
 	}
 
 	void TestPeriodic() {}
