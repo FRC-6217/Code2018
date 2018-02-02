@@ -131,11 +131,11 @@ public:
 
 		//controls Grabber Mechanism
 		if (xboxJoystick->GetRawButton(1)){
-			grabberLeft->Set(.5); //suck in
+			grabberLeft->Set(.5); //suck
 			grabberRight->Set(.5);
 		}
 		else if (xboxJoystick->GetRawButton(2)) {
-			grabberLeft->Set(-.5); //shoot out
+			grabberLeft->Set(-.5); //shoot
 			grabberRight->Set(-.5);
 		}
 		else {
